@@ -47,6 +47,7 @@ static const FlashDesc FlashDevices[] = {
     {"MX25L3205"  , 0xC22016, 4 * 1024,       256, 64},
     {"MX25L6405"  , 0xC22017, 8 * 1024,       256, 64},
     {"MX25L8005"  , 0xC22014,     1024,       256, 64},
+    {"MX25X40"    , 0xC22013,      512,       256, 64},
     // Microchip
     {"SST25VF512" , 0xBF4800,       64,       256, 32},
     {"SST25VF032" , 0xBF4A00, 4 * 1024,       256, 32},
@@ -171,6 +172,7 @@ uint8_t GetManufacturerId(uint32_t jedec_id) {
 void SetupChipCommands(uint32_t jedec_id) {
   uint8_t manufacturer_id = GetManufacturerId(jedec_id);
   switch (manufacturer_id) {
+  case 0xC2:
   case 0xEF:
     // These are the codes for Winbond
     WriteReg(0x62, 0x6);  // Flash Write enable op code
